@@ -47,7 +47,7 @@ format:
     toc-location: left
     theme: 
       light: superhero
-      dark: yeti
+      dark: superhero
     css: styles.css
 
 

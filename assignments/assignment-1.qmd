@@ -10,13 +10,13 @@ title: "Assignment 1"
 
 My first assignment has four parts.
 
-## (a)
+## (a : Choose a video from one of the following sources and provide a brief summary in your Quarto document)
 
 Bu yazıyı değişikleri test etmek için yazıyorum.
 
-## (b)
+## (b: Demonstrate and explain three differences between R and Python (e.g. coding style, syntax etc.) Include coding examples using code chunks.)
 
-## (c)
+## (c : Import the “na_example” data set from the dslabs package.Then replace all NA values in the “na_example” data set with 0, and store it as a new object. After making this change, print the new data frame (the one without NAs) and the total number of NAs in this new data frame)
 ```{r}
 
 library(dslabs)
@@ -27,3 +27,7 @@ no_nas <- ifelse(is.na(na_example), 0, na_example)
 no_nas
 sum(is.na(no_nas))
 ```
+
+## (d : Render your Quarto website locally and commit your changes to GitHub.)
+
+It is synced to GitHub
