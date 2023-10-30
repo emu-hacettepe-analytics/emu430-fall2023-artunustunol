@@ -12,7 +12,7 @@ My first assignment has four parts.
 
 ## (a)
 
-
+Bu yazıyı değişikleri test etmek için yazıyorum.
 
 ## (b)
 
