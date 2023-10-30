@@ -2,29 +2,37 @@
 title: "About Me"
 sidebar: false 
 ---
+# My CV
+
+<https://www.dropbox.com/scl/fi/s21plgj9kvvvohcyumnc8/cv_ustunol_10.23.pdf?rlkey=lfheji87hw8c3u5joguqxugng&dl=0>
 
 # Education
 
--   B.S., Industrial Engineering, Hacettepe University, Turkey, 20xx - ongoing.
+-   B.S., Industrial Engineering, Hacettepe University, Turkey, 2019 - ongoing.
 
 # Work Experience
 
 ## Employements
 
-1.  Firm xxx, position xx, year xxx
+1.  Superios Shores Resort, Restaurant attendant, 2023
 
-2.  Firm yyy, position yyy, year yyy
+
 
 ## Internships
+1.  KİPAŞ HOLDİNG, Üretim Mühendisi Stajyeri, 2022
 
-1.  Firm aaa, position xx, year xxx
 
-2.  Firm bbb, position yyy, year yyy
+# Languages
 
-# Projects
+Turkish : Main language
+
+English : Fluent
+
+Japanese : Beginner
 
 # Competencies
 
-R, Quarto, Git, Python
+R, Quarto, Git, Python, Excel, XLstat, Matlab,
 
 # Hobbies
+Folk Dance, Guitar, Running, Swimming
