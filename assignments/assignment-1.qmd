@@ -12,11 +12,74 @@ My first assignment has four parts.
 
 ## (a : Choose a video from one of the following sources and provide a brief summary in your Quarto document)
 
-Bu yazıyı değişikleri test etmek için yazıyorum.
+The video I chose --\> [https://www.youtube.com/watch?v=mrvhk2XUfWo](#0)
+
+The Summary:
+
+The video is about capabilities of Quarto. Quarto is the next generation of RMarkwdown for any data scientist. It aims to be language-agnostic tool that can work with anything that becomes popular. It is an open-source publishing system. Quarto has commands like render-preview-publish which is used for render documents and publish it for locally or to websites which can be updateable.
+
+The biggest difference between RMarkfown and Quarto is that you can use Quarto even though you don't have R, in addition to that, Quarto also extends to other languages. You can also switch between other languages which makes it very flexible.
+
+Other big difference is when you download R Studio, you also have access to Quarto. You also get different formats like websites, blogs or books once you installed Quarto.
+
+Quarto has a comfort of your own system and you can still collobrate across a document with a shared syntax. RMarkdown will be maintained but it is possible to render RMarkdown documents in Quarto. You can also add extensions to Quarto like short codes, filters, formats etc.
 
 ## (b: Demonstrate and explain three differences between R and Python (e.g. coding style, syntax etc.) Include coding examples using code chunks.)
 
-## (c : Import the “na_example” data set from the dslabs package.Then replace all NA values in the “na_example” data set with 0, and store it as a new object. After making this change, print the new data frame (the one without NAs) and the total number of NAs in this new data frame)
+::: {style="color: green"}
+First, I need to note that I used ChatGPT to help me. I asked it to the same question I have. I also asked it to give simple examples so that it could be more understandable. I also regenerated some answers and finally I got the optimal results as far as I could. In the end I changed the desciptions to summaries.
+:::
+
+The first and the most obvious difference is that the operator sign in R is "\<-" and "="in Pyhton.
+
+Example in R:
+
+x \<- 10
+
+x
+
+Example in Python:
+
+x = 10
+
+print(x)
+
+The second difference is vectorized operations. R is optimized for vectorized operations but you have use libraries for doing that.
+
+Example in R:
+
+x \<- c(1, 2, 3)
+
+y \<- c(4, 5, 6)
+
+result \<- x + y
+
+Example in Pyhton:
+
+import numpy as np
+
+x = np.array(\[1, 2, 3\])
+
+y = np.array(\[4, 5, 6\])
+
+result = x + y
+
+The third difference is loop convenience. Pyhton has traditional for and while loops but R has "apply" family of functions which makes it easier.
+
+Example in R:
+
+data \<- c(1, 2, 3, 4, 5)
+
+squared_data \<- sapply(data, function(x) x\^2)
+
+Example in Pyhton:
+
+data = \[1, 2, 3, 4, 5\]
+
+squared_data = \[x\*\*2 for x in data\]
+
+## (c : Import the "na_example" data set from the dslabs package.Then replace all NA values in the "na_example" data set with 0, and store it as a new object. After making this change, print the new data frame (the one without NAs) and the total number of NAs in this new data frame)
+
 ```{r}
 
 library(dslabs)

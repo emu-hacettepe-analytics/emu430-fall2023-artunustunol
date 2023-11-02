@@ -250,10 +250,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>My first assignment has four parts.</p>
 <section id="a-choose-a-video-from-one-of-the-following-sources-and-provide-a-brief-summary-in-your-quarto-document" class="level2">
 <h2 class="anchored" data-anchor-id="a-choose-a-video-from-one-of-the-following-sources-and-provide-a-brief-summary-in-your-quarto-document">(a : Choose a video from one of the following sources and provide a brief summary in your Quarto document)</h2>
-<p>Bu yazıyı değişikleri test etmek için yazıyorum.</p>
+<p>The video I chose –&gt; <a href="#0">https://www.youtube.com/watch?v=mrvhk2XUfWo</a></p>
+<p>The Summary:</p>
+<p>The video is about capabilities of Quarto. Quarto is the next generation of RMarkwdown for any data scientist. It aims to be language-agnostic tool that can work with anything that becomes popular. It is an open-source publishing system. Quarto has commands like render-preview-publish which is used for render documents and publish it for locally or to websites which can be updateable.</p>
+<p>The biggest difference between RMarkfown and Quarto is that you can use Quarto even though you don’t have R, in addition to that, Quarto also extends to other languages. You can also switch between other languages which makes it very flexible.</p>
+<p>Other big difference is when you download R Studio, you also have access to Quarto. You also get different formats like websites, blogs or books once you installed Quarto.</p>
+<p>Quarto has a comfort of your own system and you can still collobrate across a document with a shared syntax. RMarkdown will be maintained but it is possible to render RMarkdown documents in Quarto. You can also add extensions to Quarto like short codes, filters, formats etc.</p>
 </section>
 <section id="b-demonstrate-and-explain-three-differences-between-r-and-python-e.g.-coding-style-syntax-etc.-include-coding-examples-using-code-chunks." class="level2">
 <h2 class="anchored" data-anchor-id="b-demonstrate-and-explain-three-differences-between-r-and-python-e.g.-coding-style-syntax-etc.-include-coding-examples-using-code-chunks.">(b: Demonstrate and explain three differences between R and Python (e.g.&nbsp;coding style, syntax etc.) Include coding examples using code chunks.)</h2>
+<div style="color: green">
+<p>First, I need to note that I used ChatGPT to help me. I asked it to the same question I have. I also asked it to give simple examples so that it could be more understandable. I also regenerated some answers and finally I got the optimal results as far as I could. In the end I changed the desciptions to summaries.</p>
+</div>
+<p>The first and the most obvious difference is that the operator sign in R is “&lt;-” and “=”in Pyhton.</p>
+<p>Example in R:</p>
+<p>x &lt;- 10</p>
+<p>x</p>
+<p>Example in Python:</p>
+<p>x = 10</p>
+<p>print(x)</p>
+<p>The second difference is vectorized operations. R is optimized for vectorized operations but you have use libraries for doing that.</p>
+<p>Example in R:</p>
+<p>x &lt;- c(1, 2, 3)</p>
+<p>y &lt;- c(4, 5, 6)</p>
+<p>result &lt;- x + y</p>
+<p>Example in Pyhton:</p>
+<p>import numpy as np</p>
+<p>x = np.array([1, 2, 3])</p>
+<p>y = np.array([4, 5, 6])</p>
+<p>result = x + y</p>
+<p>The third difference is loop convenience. Pyhton has traditional for and while loops but R has “apply” family of functions which makes it easier.</p>
+<p>Example in R:</p>
+<p>data &lt;- c(1, 2, 3, 4, 5)</p>
+<p>squared_data &lt;- sapply(data, function(x) x^2)</p>
+<p>Example in Pyhton:</p>
+<p>data = [1, 2, 3, 4, 5]</p>
+<p>squared_data = [x**2 for x in data]</p>
 </section>
 <section id="c-import-the-na_example-data-set-from-the-dslabs-package.then-replace-all-na-values-in-the-na_example-data-set-with-0-and-store-it-as-a-new-object.-after-making-this-change-print-the-new-data-frame-the-one-without-nas-and-the-total-number-of-nas-in-this-new-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="c-import-the-na_example-data-set-from-the-dslabs-package.then-replace-all-na-values-in-the-na_example-data-set-with-0-and-store-it-as-a-new-object.-after-making-this-change-print-the-new-data-frame-the-one-without-nas-and-the-total-number-of-nas-in-this-new-data-frame">(c : Import the “na_example” data set from the dslabs package.Then replace all NA values in the “na_example” data set with 0, and store it as a new object. After making this change, print the new data frame (the one without NAs) and the total number of NAs in this new data frame)</h2>
