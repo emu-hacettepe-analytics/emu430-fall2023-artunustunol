@@ -2,9 +2,10 @@
 title: "About Me"
 sidebar: false 
 ---
+
 # My CV
 
-<https://www.dropbox.com/scl/fi/s21plgj9kvvvohcyumnc8/cv_ustunol_10.23.pdf?rlkey=lfheji87hw8c3u5joguqxugng&dl=0>
+You can view my CV from [here](<https://www.dropbox.com/scl/fi/s21plgj9kvvvohcyumnc8/cv_ustunol_10.23.pdf?rlkey=lfheji87hw8c3u5joguqxugng&dl=0>)
 
 # Education
 
@@ -16,11 +17,9 @@ sidebar: false
 
 1.  Superios Shores Resort, Restaurant attendant, 2023
 
-
-
 ## Internships
-1.  KİPAŞ HOLDİNG, Üretim Mühendisi Stajyeri, 2022
 
+1.  KİPAŞ HOLDİNG, Üretim Mühendisi Stajyeri, 2022
 
 # Languages
 
@@ -35,4 +34,5 @@ Japanese : Beginner
 R, Quarto, Git, Python, Excel, XLstat, Matlab,
 
 # Hobbies
+
 Folk Dance, Guitar, Running, Swimming
