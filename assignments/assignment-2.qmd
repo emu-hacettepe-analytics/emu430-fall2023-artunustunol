@@ -1,10 +1,134 @@
----
-title: "Assignment 2"
----
-
-# Assignment 2
-
 ```{r}
-1 + 1
+library(tidyverse)
+library(rvest)
+library(stringr)
+library(scales)
+library(dplyr)
+
+library(rvest)
+
+# vectors that contains URL's
+urls <- c("https://m.imdb.com/search/title/?title_type=feature&release_date=2010-01-01,2023-03-11&num_votes=2500,&country_of_origin=TR&count=250" , 
+          "https://m.imdb.com/search/title/?title_type=feature&release_date=,2010-01-01&num_votes=2500,&country_of_origin=TR&count=250")
+
+# read html and save it to a list 
+page <- lapply(urls, function(url) {
+  read_html(url)
+})
+
+
+
+# Get the title data
+titles_list <- lapply(urls, function(url) {
+  page <- read_html(url, encoding = "UTF-8")
+  titles_nodes <- html_nodes(page, '.ipc-title__text')  # Title için CSS seçicisi
+  titles <- html_text(titles_nodes)
+  return(titles)
+})
+
+# combine titles on a new variable
+all_titles <- unlist(titles_list)
+
+# clean the data from the words "Advanced" and "Recently"
+all_titles <- all_titles[!grepl("Advanced", all_titles)]
+all_titles <- all_titles[!grepl("Recently", all_titles)]
+
+all_titles_cleaned <- c()
+for (x in all_titles) {
+  a <- gsub("^[0-9]+\\.\\s*", "", x)
+  all_titles_cleaned <- c(all_titles_cleaned, a)
+}
+
+
+years_list <- lapply(urls, function(url) {
+  page <- read_html(url, encoding = "UTF-8")  # I tried to use UTF-8 to solve the problem for Turkish characters but I couldn't
+  years_nodes <- html_nodes(page, '.sc-43986a27-8.jHYIIK.dli-title-metadata-item')
+  years <- html_text(years_nodes)
+  return(years)
+})
+
+# Combine year data
+all_years <- unlist(years_list)
+
+years_cleaned <- c()
+for (a in all_years) {
+  x <- grep("^[0-9]+$", a, value = TRUE)
+  years_cleaned <- c(years_cleaned, x)
+}
+years_cleaned <- as.integer(years_cleaned)
+
+durations_list <- lapply(urls, function(url) {
+  page <- read_html(url, encoding = "UTF-8")  
+  durations_nodes <- html_nodes(page, '.sc-43986a27-8.jHYIIK.dli-title-metadata-item')
+  durations <- html_text(durations_nodes)
+  return(durations)
+})
+
+durations_cleaned <- c()
+for (a in durations_list) {
+  x <- grep("[hm]", a, value = TRUE)
+  durations_cleaned <- c(durations_cleaned, x)
+}
+
+convert_to_minutes <- function(durations_cleaned) {
+
+    hours <- as.numeric(str_extract(durations_cleaned, "\\d+(?=h)"))
+    minutes <- as.numeric(str_extract(durations_cleaned, "\\d+(?=m)"))
+    
+    if (is.na(hours)) { hours <- 0 }
+    if (is.na(minutes)) { minutes <- 0 }
+    
+    total_minutes <- hours * 60 + minutes
+    return(total_minutes)
+}
+durations_converted <- c()
+for (a in durations_cleaned){
+  x <- convert_to_minutes(a)
+  durations_converted <- c(durations_converted, x)
+}
+
+ratings_list <- lapply(urls, function(url) {
+  page <- read_html(url, encoding = "UTF-8") 
+  ratings_nodes <- html_nodes(page, '.ipc-rating-star.ipc-rating-star--base.ipc-rating-star--imdb.ratingGroup--imdb-rating')
+  ratings <- html_text(ratings_nodes)
+  return(ratings)
+})
+
+all_ratings <- unlist(ratings_list)
+
+ratings_cleaned <- c()
+for (x in all_ratings) {
+  rating_elements <- sub("^([0-9]\\.[0-9]).*$", "\\1", x)
+  ratings_cleaned <- c(ratings_cleaned, rating_elements)
+}
+
+ratings_cleaned_integer <- as.numeric(ratings_cleaned)
+
+votes_list <- lapply(urls, function(url) {
+  page <- read_html(url, encoding = "UTF-8")  
+  votes_nodes <- html_nodes(page, '.sc-53c98e73-0.kRnqtn')  
+  votes <- html_text(votes_nodes)
+  return(votes)
+})
+
+all_votes <- unlist(votes_list)
+
+votes_cleaned <- as.numeric(sapply(all_votes, function(x) {
+  numeric_value <- gsub("Votes|,", "", x)
+}))
+
+final_data <- data.frame(Title = all_titles_cleaned,
+                         Year = years_cleaned,
+                         Duration = durations_converted,
+                         Rating = ratings_cleaned_integer,
+                         Vote = votes_cleaned)
+
+final_data_rated <- final_data[order(final_data$Rating, decreasing = TRUE),]
+best_five <- head(final_data_rated)
+worst_five <- tail(final_data_rated)
+#To be honest, I didn't watch top five movies except Fundamentals, I'm a huge fan of Cem Yılmaz.
+# And of course I didn't punish myself with Cumali Ceber or any other movies of worst five
+
+cem_yilmaz_classics <- filter(final_data, Title %in% c("G.O.R.A.","Av Mevsimi"))
+
 ```
-We are waiting for marination of assignment 2...
