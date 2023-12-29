@@ -4,8 +4,10 @@ library(rvest)
 library(stringr)
 library(scales)
 library(dplyr)
-
+library(ggplot2)
 library(rvest)
+library(gridExtra)
+Sys.setlocale("LC_ALL", "en_US.UTF-8")
 
 # vectors that contains URL's
 urls <- c("https://m.imdb.com/search/title/?title_type=feature&release_date=2010-01-01,2023-03-11&num_votes=2500,&country_of_origin=TR&count=250" , 
@@ -130,5 +132,69 @@ worst_five <- tail(final_data_rated)
 # And of course I didn't punish myself with Cumali Ceber or any other movies of worst five
 
 cem_yilmaz_classics <- filter(final_data, Title %in% c("G.O.R.A.","Av Mevsimi"))
+
+yearly_avg_ratings <- final_data %>%
+  group_by(Year) %>%
+  summarise(Average_Rating = mean(Rating, na.rm = TRUE))
+
+# Scatter plot oluşturma
+plot_scatter <- ggplot(yearly_avg_ratings, aes(x = Year, y = Average_Rating)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Yearly Rating Averages ", x = "Year", y = "Average Rating")
+
+plot_box <- ggplot(final_data, aes(x = as.factor(Year), y = Rating)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Yearly Rating Averages", x = "Year", y = "Average Rating") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+grid.arrange(plot_box, plot_scatter, ncol = 2)
+
+#With the box plot, we can see that the variation of ratings increase over time. The reason of this might be increased number of movies produced in years, in addition to that; accessibility of movie making is higher and this leads to a high number of poorly-produced or amateurly-produced movies.
+
+ggplot(final_data, aes( Vote, Rating)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(method = "lm", color = "red")+
+  scale_x_log10() +
+  theme_minimal()+
+  labs(title = "Correlation Between Ratings and Vote")
+
+ggplot(final_data, aes( Duration, Rating)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(method = "lm", color = "yellow")+
+  scale_x_log10() +
+  theme_minimal()+
+  labs(title = "Correlation Between Ratings and Durations")
+
+cor_vote_duration <- cor.test(final_data$Vote, final_data$Duration, 
+                    method = "pearson")
+
+cor_vote_ratings <- cor.test(final_data$Vote, final_data$Rating, 
+                    method = "pearson")
+
+#These correlation tests emphasises that duration and vote are more correlated than ratings and vote.
+
+url_top1000 <- "https://m.imdb.com/search/title/?title_type=feature&groups=top_1000&country_of_origin=TR"
+#data_top1000 <- read_html(url_top1000)
+
+titles_top1000 <- lapply(urls, function(url) {
+  page <- read_html(url_top1000, encoding = "UTF-8")
+  titles_nodes <- html_nodes(page, '.ipc-title__text')  # Title için CSS seçicisi
+  titles <- html_text(titles_nodes)
+  return(titles)
+})
+
+
+titles_top1000_cleaned <- c()
+for (x in titles_top1000) {
+  a <- gsub("^[0-9]+\\.\\s*", "", x)
+  titles_top1000_cleaned <- c(titles_top1000_cleaned, a)
+}
+
+titles_top1000_cleaned <- titles_top1000_cleaned[!grepl("Advanced", titles_top1000_cleaned)]
+titles_top1000_cleaned <- titles_top1000_cleaned[!grepl("Recently", titles_top1000_cleaned)]
+
+titles_top1000_cleaned <- unique(titles_top1000_cleaned)
 
 ```
