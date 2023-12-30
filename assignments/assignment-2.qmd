@@ -197,4 +197,27 @@ titles_top1000_cleaned <- titles_top1000_cleaned[!grepl("Recently", titles_top10
 
 titles_top1000_cleaned <- unique(titles_top1000_cleaned)
 
+years_top1000 <- lapply(urls, function(url) {
+  page <- read_html(url_top1000, encoding = "UTF-8")
+  titles_nodes <- html_nodes(page, '.sc-43986a27-8.jHYIIK.dli-title-metadata-item')  # Title için CSS seçicisi
+  titles <- html_text(titles_nodes)
+  return(titles)
+})
+
+years_top1000_cleaned <- c()
+for (a in years_top1000) {
+  x <- grep("^[0-9]+$", a, value = TRUE)
+  years_top1000_cleaned <- c(years_top1000_cleaned, x)
+}
+years_top1000_cleaned <- as.integer(years_top1000_cleaned)
+
+final_top1000 <- data.frame(Title = titles_top1000_cleaned,
+                            Year = years_top1000_cleaned)
+final_top1000 <- unique(final_top1000)
+
+final_top1000_extended <- merge(final_top1000, final_data, all.x = TRUE)
+
+final_top1000_extended_rated <- final_top1000_extended[order(final_top1000_extended$Rating, decreasing = TRUE),]
+#The two lists are not identical, I first checked that if it is related to votes but it is not, which means there may be an algorithm to calculate a score for ranking, or something else.
+
 ```
